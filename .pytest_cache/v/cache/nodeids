@@ -1,0 +1,10 @@
+[
+  "test_string_calculator.py::test_return_0_for_empty_string",
+  "test_string_calculator.py::test_single_numbers",
+  "test_string_calculator.py::test_add_stringNumbers",
+  "test_string_calculator.py::test_new_lines",
+  "test_string_calculator.py::test_different_delimiters",
+  "test_string_calculator.py::test_delimiters_mixed",
+  "test_string_calculator.py::test_minuses",
+  "test_string_calculator.py::test_reject_negetive_numbers"
+]
