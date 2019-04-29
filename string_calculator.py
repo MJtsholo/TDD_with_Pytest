@@ -1,28 +1,23 @@
+import re
+
+class NegativeError(Exception):
+	pass
+
+def convert(value):
+	if value < 0:
+		raise NegativeError
 
 def add(stringDigits):
-	stringDigits = normalise_delim(stringDigits)
-	if stringDigits:
-		return add_string_numbers(stringDigits)
-	else:
+	if stringDigits == "":
 		return 0
-
-def normalise_delim(stringDigits):
-	stringDigits = normalise_diff_delim(stringDigits)
-	stringDigits = stringDigits.replace("\n", ",")
-	return stringDigits
-
-def normalise_diff_delim(stringDigits):
-	if stringDigits.startswith("//"):
-		delim_spec, stringDigits = stringDigits.split("\n", 1)
-		delimt = delim_spec[2:]
-		stringDigits = stringDigits.replace(delimt, ",")
-	return stringDigits
-
-def add_string_numbers(stringDigits):
-	numbers = map(int, stringDigits.split(","))
-	check_numbers(numbers)
-	return sum(numbers)
-
-def check_numbers(numbers):
-	if any(number < 0 for number in numbers):
-		raise ValueError
+	try:
+		return int(stringDigits)
+	except ValueError:
+		try:
+			m = re.split("//(.)\n(.*)", stringDigits)
+			delimiter = m[1]
+			stringDigits = m[2]
+		except:
+			delimiter = "\n,"
+		number_split = [int(n) for n in re.split("[%s]*" % delimiter, stringDigits)]
+		return sum(number_split)
